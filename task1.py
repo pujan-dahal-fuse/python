@@ -210,8 +210,155 @@ print("I love {} and {}".format("mango", "pineapple"))
 print("I love {1} and {0}".format("mango", "pineapple"))
 # op: I love pineapple and mango
 
+pi = 3.1415869
+print("The value of pi is %3.2f" %pi)
+# op: The value of pi is 3.14
+print("The value of pi is %3.4f" %pi)
+# op: The value of pi is 3.1416
+
+x = 11
+y = 22
+print(f"The value of x is {x} and y is {y}")
+# op: The value of x is 11 and y is 22
+
+#input
+age = input("Enter your age: ")
+print(f"You are {age} years old")
+# op: Enter your age: 23
+# You are 23 years old
+
+x = int(input("Enter x: "))
+y = int(input("Enter y: "))
+print("The sum is: {}".format(x+y))
+# Enter x: 11
+# Enter y: 33
+# The sum is: 44
+
+#import
+# used when program grows bigger, so we divide code into different modules
+import math
+print(math.pi) # 3.141592653589793
+
+
 # Python Operators
+x = 59
+y = 11
+print("x + y =", x+y)
+print("x - y =", x-y)
+print("x * y =", x*y)
+print("x / y =", x/y)
+print("x // y =", x//y)
+print("x ** y =", x**y)
+
+x = 59
+y = 11
+print("x + y =", x+y)
+print("x - y =", x-y)
+print("x * y =", x*y)
+print("x / y =", x/y)
+print("x // y =", x//y)
+print("x ** y =", x**y)
+# x + y = 70
+# x - y = 48
+# x * y = 649
+# x / y = 5.363636363636363
+# x // y = 5
+# x ** y = 30155888444737842659
+
+print("x + y =", x+y)
+print("x - y =", x-y)
+print("x * y =", x*y)
+print("x / y =", x/y)
+print("x // y =", x//y)
+print("x ** y =", x**y)
+# x + y = 70
+# x - y = 48
+# x * y = 649
+# x / y = 5.363636363636363
+# x // y = 5
+# x ** y = 30155888444737842659
+
+# logical operators
+print('x > y is',x>y)
+print('x < y is',x<y)
+print('x == y is',x==y)
+print('x != y is',x!=y)
+print('x >= y is',x>=y)
+print('x <= y is',x<=y)
+# x > y is True
+# x < y is False
+# x == y is False
+# x != y is True
+# x >= y is True
+# x <= y is False
+
+#bitwise operators
+x = 0b1100 # 12
+y = 0b1001 # 9
+
+print("x & y = ", bin(x & y))
+print("x | y = ", bin(x | y))
+print("~x = ", bin(~x))
+print("x ^ y = ", bin(x ^ y))
+print("x >> 2 = ", bin(x >> 2))
+print("x << 2 = ", bin(x << 1))
+# x & y =  0b1000
+# x | y =  0b1101
+# ~x =  -0b1101
+# x ^ y =  0b101
+# x >> 2 =  0b11
+# x << 2 =  0b11000
+
+
+# membership operators
+# in returns true if value/variable is found in the sequence
+# not in returns true if value/variable is not found in the sequence
+
+x = "Hello world"
+y = {1: "a", 2: "b"}
+
+print("H" in x) # true
+print("hello" not in x) # true
+print(1 in y) # true
+print("a" in y) # false
+
+
 # Python namespace
+# Local, Global variables
+# namespace is mapping of names to corresponding objects
+def outer_func():
+    a = 30
+    b = 20  # local variable in outer_function namespace
+    def inner_func():
+        a = 100
+        c = 10
+        b = 10# local variable in inner_function namespace
+        print(b)
+    inner_func()
+    print(b)
+a = 10 # global variable in global namespace
+outer_func()
+print(a) # 10
+
+# defining a as global
+def outer_func():
+    global a
+    a = 100 # a is now global variable in global namespace
+    print(a) # 100
+    def inner_func():
+        global a
+        a = 200 # a is global variable in global namespace
+        print(a) # 200
+
+    inner_func()
+    print(a) # 200
+
+a = 10
+outer_func()
+print(a) # 200
+
+
+
 # Python Flow Control ( if else )
 age = 22
 if age < 18:
@@ -230,10 +377,10 @@ elif (score >= 80) and (score <= 100):
     print("Distinction")
 else:
     print("Failed")
+# op: First division
 
 
 # Python Loop (for, while)
-
 # for loop
 inventory = ["apple", "oranges", "mangoes"]
 for item in inventory:
@@ -250,15 +397,191 @@ print("Sum of digits from 1 to 10 is:", result)
 my_list = [i for i in range(1, 11)]
 print(my_list)
 
+# for loop with else
+digits = [1, 4, 6, 10]
+for num in digits:
+    print(num)
+else:
+    print("No digits left")
+# 1
+# 4
+# 6
+# 10
+# No digits left
+
+# while loop
+# table of a digit
+num = 9
+i = 1
+while i <= 10:
+    print(f"{num} x {i} = {num*i}")
+    i += 1
+
+# 9 x 1 = 9
+# 9 x 2 = 18
+# 9 x 3 = 27
+# 9 x 4 = 36
+# 9 x 5 = 45
+# 9 x 6 = 54
+# 9 x 7 = 63
+# 9 x 8 = 72
+# 9 x 9 = 81
+# 9 x 10 = 90
+
+num = int(input("Enter a number: "))
+# sum from 0 to n
+result = 0
+i = 1
+while i <= num:
+    result = result + i
+    i += 1
+print("The sum from 0 to {} is:".format(num), result)
+# Enter a number: 10
+# The sum from 0 to 10 is: 55
+
 # Python break, continue and pass
+my_list = [i for i in range(1, 11)]
+for num in my_list:
+    if num == 7:
+        continue
+    print(num, end=' ')
+# op: 1 2 3 4 5 6 8 9 10
+
+my_list = [i for i in range(1, 11)]
+for num in my_list:
+    if num == 7:
+        break
+    print(num, end=' ')
+# op: 1 2 3 4 5 6
+
+# pass is a null statement, it results in no operation
+# pass is generally used as a placeholder
+my_list = [i for i in range(1, 11)]
+for num in my_list:
+    if num == 7:
+        pass
+    print(num, end=' ')
+
+# op: 1 2 3 4 5 6 7 8 9 10
+
+def square(num):
+    pass # pass is used as a placeholder for future statements at this place
+
+
 # Functions
 # Return statement
+import math
+def area_of_triangle(a, b, c):
+    s = (a + b + c)/2 # semi-perimeter
+    area = math.sqrt(s*(s-a)*(s-b)*(s-c))
+    return area
+
+print("Area of triangle with sides 3, 4, 5 is: {}".format(area_of_triangle(3, 4, 5)))
+
+# Area of triangle with sides 3, 4, 5 is: 6.0
+
+def greet(name):
+    """
+    This function greets to the person passed in as a parameter
+    """
+    print("Hello, {}. Good morning !".format(name))
+
+greet("Pujan")
+# Hello, Pujan. Good morning !
+
+def absolute_val(num):
+    if num >= 0:
+        return num
+    else:
+        return -num
+
+print(absolute_val(-77)) # 77
+print(absolute_val(66)) # 66
+
 # Function Arguments (Default, keyword, arbitrary)
+def greet(name, msg):
+    print(f"Hello {name}, {msg}!")
+
+greet("Pujan", "Goodnight")
+# Hello Pujan, Goodnight!
+
+# non default arguments cannot follow default arguments
+def greet(name, msg = "Good morning"): # default msg is Good morning
+    print(f"Hello {name}, {msg}!")
+
+greet("Pujan")
+greet("Pujan", "Good night")
+# Hello Pujan, Good morning!
+# Hello Pujan, Good night!
+
+#keyword arguments
+greet(msg = "Having fun", name = "Hari")
+# Hello Hari, Having fun!
+
+#arbitrary arguments
+def greet(*names):
+    for name in names:
+        print(f"Hello {name}")
+
+greet("Ram", "Shyam", "Hari", "Mohan", "Krishna")
+# Hello Ram
+# Hello Shyam
+# Hello Hari
+# Hello Mohan
+# Hello Krishna
+
+
+
 # Inbuilt functions
+my_list = ["Ram", "Shyam", "Hari", "Bishal", "Mohan"]
+print(len(my_list)) # 5
+print(abs(-234)) # 234
+print(bin(18)) # 0b10010
+
+print(bool(0)) # false
+print(bool(1)) # true
+
+val = dict([[1, "apple"], [2, "banana"]])
+print(val) # {1: 'apple', 2: 'banana'}
+print('id(val): {}'.format(id(val))) # id(val): 140245695846400
+print(max(my_list)) # Shyam
+print(min(my_list)) # Bishal
+print(round(1.569902, 2)) # 1.57
+
+new_list = [1, 4, 5, 6]
+print(sum(new_list)) # 16
+
+
 # Python Anonymous/ Lambda Function
+# these are anonymous functions that can take any number of arguments but have
+# only one expression
+double = lambda n:n*2
+
+print(double(10)) # 20
+
+add = lambda a, b: a+b
+print(add(10, 20)) # 30
+
+larger = lambda a, b: a if a>b else b
+print(larger(10, 46))
+
+# sorting in order of length of name
+names = ['Alan', 'Rick', 'Morty', 'William', 'Jackobson']
+names.sort(key = lambda x:len(x))
+print(names)
+
+def my_func(n):
+    return lambda a:a*n
+
+my_doubler = my_func(2)
+my_tripler = my_func(3)
+
+print(my_doubler(11)) # 22
+print(my_tripler(11)) # 33
+
+
 # Filters, map functions
-# Local, Global variables
-# Python Data Types in details (List, Dictionary, Tuple, Set, Strings)
+
 
 
 
