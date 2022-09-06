@@ -40,8 +40,83 @@ def add_a_b(a, b):
 
 
 # Docstring
+def square(num):
+    ''' Takes in a number num, returns the square of num '''
+    return n**2
+
+# Here the string ''' Takes in a number num, returns the square of num ''' is a docstring
+# because it comes just after function defenition. Python docstring can be accessed by using __doc__ attribute of function
+def square(num):
+    ''' Takes in a number num, returns the square of num '''
+    return n**2
+print(square.__doc__)
+
+
 # Python Variable, constant and literal
+# variables
+numberic_variable = 25.77
+string_variable = "This is my home"
+boolean_variable = True
+a, b, c = 4, 4.5, "Hello"
+print(a, b, c)
+
+# constant
+import constant
+print(constant.PI)
+print(constant.GRAVITY)
+print(constant.SPEED_OF_LIGHT)
+
+#numeric literals
+# they are immutable
+a = 0b1010 #Binary Literals
+b = 1908 #decimal literal
+c = 0o310 #octal literal
+d = 0x12cde #Hexadecimal literal
+
+#Float literal
+float_1 = 10.5
+float_2 = 1.53e4
+
+#complex_literal
+x = 2.44j
+y = 1.16 + 7.2j
+
+print(a, b, c, d)
+print(float_1, float_2)
+print(x, x.imag, x.real)
+print(y, y.imag, y.real)
+
+
+#string literals
+my_str = "This is my lamp"
+char = "c"
+multiline_str = """
+                This string can extend to multiple lines.
+                Haha.
+                """
+unicode = u"\u00dcnic\u00f6de"
+raw_str = r"raw \n string" # \n is not processed here
+
+print(my_str)
+print(char)
+print(multiline_str)
+print(unicode)
+print(raw_str)
+
+#boolean literals
+x = (1 == True)
+y = (1 == False)
+a = True + 8
+b = False + 11
+
+print("x is", x)
+print("y is", y)
+print("a:", a)
+print("b:", b)
+
 # Python Data Type
+
+
 # Python Type Conversion and Type casting
 # Python input, output and import
 # Python Operators
