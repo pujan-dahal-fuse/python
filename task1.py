@@ -581,8 +581,63 @@ print(my_tripler(11)) # 33
 
 
 # Filters, map functions
+# map is used to write simpler shorter code
+# map(func, *iterables)
+# func is the name of function and iterables is the elements that the function
+# would be applied on
+names = ["alfred", "lawrence", "bacon", "ginger"]
+
+uppered_names = list(map(str.upper, names))
+print(uppered_names)
+# ['ALFRED', 'LAWRENCE', 'BACON', 'GINGER']
 
 
+area_of_circle = lambda radius: round(3.14 * radius * radius, 2)
+list_of_radii = [2, 4, 5, 7, 11]
+areas = list(map(area_of_circle, list_of_radii))
+print(areas)
+# [12.56, 50.24, 78.5, 153.86, 379.94]
+
+area_of_triangle = lambda b,h: round(1/2 * b * h, 2)
+list_of_base_height = [(3, 4), (5, 12), (8, 16), (4, 10)]
+areas = list(map(area_of_triangle, [pair[0] for pair in list_of_base_height], [pair[1] for pair in list_of_base_height]))
+print(areas)
+# [6.0, 30.0, 64.0, 20.0]
+
+circle_areas = [3.56773, 5.57668, 4.00914, 56.24241, 9.01344, 32.00013]
+result = list(map(round, circle_areas, range(1, 7)))
+print(result)
+# [3.6, 5.58, 4.009, 56.2424, 9.01344, 32.00013]
+
+result = list(map(round, circle_areas, [2 for i in range(len(circle_areas))]))
+print(result)
+# [3.57, 5.58, 4.01, 56.24, 9.01, 32.0]
+
+my_strings = ['a', 'b', 'c', 'd', 'e']
+my_numbers = [1, 2, 3, 4, 5]
+my_fruits = ["apple", "banana", "mango", "orange"]
+
+results = list(map(lambda x, y, z: (x, y, z), my_strings, my_numbers, my_fruits))
+print(results)
+#[('a', 1, 'apple'), ('b', 2, 'banana'), ('c', 3, 'mango'), ('d', 4, 'orange')]
 
 
+# filter(func, iterable)
+# only one iterable is required
+# filters based on function returning bool values
+# all iterable elements for which bool value false are returned are not included
 
+scores = [66, 90, 68, 59, 76, 60, 88, 74, 81, 65]
+
+is_A_student = lambda score: score > 75
+
+over_75 = list(filter(is_A_student, scores))
+print(over_75)
+# [90, 76, 88, 81]
+
+
+# detect palindrome using filter function
+words = ("demigod", "rewire", "madam", "freer", "anutforajaroftuna", "kiosk")
+palindromes = list(filter(lambda word: word == word[::-1], words))
+print(palindromes)
+# ['madam', 'anutforajaroftuna']
