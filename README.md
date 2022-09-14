@@ -6,17 +6,26 @@ This repository is made up of codes I used while learning Python and APIs. It is
 3. **api**
 
 ## **1. main**
+<<<<<<< Updated upstream
 ---
+=======
+>>>>>>> Stashed changes
 `main` contains codes that I used while learning basic and advanced Python. Codes are within `python_basic_advanced/` folder. Basic codes are in `python_basic_advanced/task1.py` and `python_basic_advanced/constant.py` files. Advanced codes are in `python_basic_advanced/advanced_topics.ipynb` file.
 
 
 ## **2. codewars**
+<<<<<<< Updated upstream
 ---
+=======
+>>>>>>> Stashed changes
 `codewars` branch contains successful Python code submissions that I made to [codewars](https://www.codewars.com). This branch is derived from main branch and submission file is in `codewars/` folder.
 
 
 ## **3. api**
+<<<<<<< Updated upstream
 ---
+=======
+>>>>>>> Stashed changes
 `api` branch contains APIs written using flask framework. This branch is derived from codewars branch. The API codes are contained in `api_practice/` folder.
 
 `api_practice/api_creation_assign.py` contains APIs for CRUD operations on `api_practice/employees.json` file. Routes for accessing APIs are as follows:
