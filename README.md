@@ -13,7 +13,7 @@ This repository is made up of codes I used while learning Python and APIs. It is
 
 
 ## **3. api**
-`api` branch contains APIs written using flask framework. This branch is derived from codewars branch. The API codes are contained in `api_practice/` folder.
+`api` branch contains APIs written using flask framework. This branch is derived from main branch. The API codes are contained in `api_practice/` folder.
 
 `api_practice/api_creation_assign.py` contains APIs for CRUD operations on `api_practice/employees.json` file. Routes for accessing APIs are as follows:
 
