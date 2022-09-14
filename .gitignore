@@ -3,3 +3,5 @@ test.txt
 learn.txt
 python_basic_advanced/.ipynb_checkpoints/
 api/.ipynb_checkpoints/
+api/__pycache__/
+api/example.json
