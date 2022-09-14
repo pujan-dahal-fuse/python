@@ -26,7 +26,7 @@ This repository is made up of codes I used while learning Python and APIs. It is
 | `/api/average_age/` | GET | Retrieve average age of all employees from `employees.json`|
 
 
-`api_practice/external_api_assign.py` contains APIs for extracting information from the The Movie Database (TMDb) i.e. external API. It stores the retrieved top-movies data from TMDb and stores it in `api_practice/example.json` file. The APIs perform further CRUD operations on the example.json file. Routes for accessing APIs are as follows:
+`api_practice/external_api_assign.py` contains APIs for extracting information from the The Movie Database (TMDb) i.e. external API. You need to put your own API key in my code, for getting private API key you should sign in to [themoviedb](https://www.themoviedb.org). It stores the retrieved top-movies data from TMDb and stores it in `api_practice/example.json` file. The APIs perform further CRUD operations on the example.json file. Routes for accessing APIs are as follows:
 
 | Routes | Method | Operation Description |
 | ----------- | ------------- | ------------ |
