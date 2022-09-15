@@ -1,6 +1,6 @@
 # **Python Repository**
 
-This repository is made up of codes I used while learning Python and APIs. It is divided into 3 branches:
+This repository is made up of codes I used while learning Python and APIs. It is divided into 4 branches:
 1. **main**
 2. **codewars**
 3. **api**
