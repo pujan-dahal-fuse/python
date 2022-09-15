@@ -4,6 +4,7 @@ This repository is made up of codes I used while learning Python and APIs. It is
 1. **main**
 2. **codewars**
 3. **api**
+4. **orm**
 ## **1. main**
 `main` contains codes that I used while learning basic and advanced Python. Codes are within `python_basic_advanced/` folder. Basic codes are in `python_basic_advanced/task1.py` and `python_basic_advanced/constant.py` files. Advanced codes are in `python_basic_advanced/advanced_topics.ipynb` file.
 
@@ -47,3 +48,11 @@ Each API file can be executed using command:
 python <path_to_file>/filename.py
 ```
 which runs the Flask app in DEBUG mode.
+
+
+## **4. orm**
+
+`orm` branch contains codes I used while learning Object Relationship Mapping (ORM). It consists of `orm/` folder. The `orm/` folder has `orm/datacamp_submissions.ipynb` which is the submissions I made to [datacamp python relational-database tutorial](https://campus.datacamp.com/courses/introduction-to-relational-databases-in-python). Another file `orm/orm_learn.ipynb` contains Python codes used while getting basic idea about ORM. `orm/requirements.txt` consists of extra libraries installed while coding in this branch. External libraries can be installed using the command:
+```
+pip install -r requirements.txt
+```
