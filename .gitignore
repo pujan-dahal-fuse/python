@@ -2,3 +2,5 @@
 test.txt
 learn.txt
 python_basic_advanced/.ipynb_checkpoints/
+orm/.ipynb_checkpoints/
+orm/__pycache__/
