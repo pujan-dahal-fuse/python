@@ -1,0 +1,1 @@
+DB_ADDRESS = 'mysql://root:@localhost:3306/LMS'
