@@ -11,7 +11,7 @@ def create_schema(engine):
     Tables list:
     1. program: 
         program_code (varchar(10), PK)
-        name (varchar(255))
+        program_name (varchar(255))
         level (varchar(20)) e.g. masters, bachelors
         num_years (int)
 
@@ -35,7 +35,7 @@ def create_schema(engine):
 
     5. instructor
         instructor_id (int, PK)
-        name (varchar(50))
+        instructor_name (varchar(50))
         dob (date)
         address (varchar(255))
         phone_no (char(10))
@@ -49,13 +49,14 @@ def create_schema(engine):
 
     7. section
         section_id (int, PK)
+        section_name (varchar(10)) # like AB CD etc
         building (varchar(10))
         room (int)
         semester_id (int, FK)
 
     8. student
         student_id (int)
-        name (varchar(50))
+        student_name (varchar(50))
         dob (date)
         address (varchar(255))
         phone_no (char(10))
@@ -66,8 +67,8 @@ def create_schema(engine):
     MetaData.reflect(metadata_obj)
 
     program = Table('program', metadata_obj,
-                    Column('program_code', String(20), primary_key=True),
-                    Column('name', String(255), nullable=False),
+                    Column('program_code', String(20), primary_key=True), # program code is unique here, so no need for another unique constraint
+                    Column('program_name', String(255), nullable=False),
                     Column('level', String(20), nullable=False),
                     Column('num_years', Integer, nullable=False)
                     )
@@ -76,12 +77,12 @@ def create_schema(engine):
                     Column('semester_id', Integer, primary_key=True, autoincrement=True),
                     Column('semester_num', Integer, nullable=False),
                     Column('program_code', String(20), ForeignKey('program.program_code', onupdate="CASCADE", ondelete="CASCADE"), nullable=False),
-                    UniqueConstraint('semester_num', 'program_code', name='UniqueKey_Semester')
+                    UniqueConstraint('semester_num', 'program_code', name='UniqueKey_semester')
                     )
 
     course = Table('course', metadata_obj,
-                Column('course_code', String(20), primary_key=True),
-                Column('name', String(255), nullable=False),
+                Column('course_code', String(20), primary_key=True), # course code is unique here
+                Column('course_name', String(255), nullable=False),
                 Column('credit_hours', Integer, nullable=False),
                 Column('num_chapters', Integer, nullable=False),
                 Column('practical_marks', Integer, default=0),
@@ -96,13 +97,14 @@ def create_schema(engine):
 
     instructor = Table('instructor', metadata_obj,
                     Column('instructor_id', Integer, primary_key=True, autoincrement=True),
-                    Column('name', String(50), nullable=False),
+                    Column('instructor_name', String(50), nullable=False),
                     Column('dob', Date, nullable=False),
                     Column('address', String(255), nullable=False),
                     Column('phone_no', String(10), nullable=False),
                     Column('position', String(50), nullable=False),
                     Column('salutation', String(20), default=''),
-                    Column('program_code', String(20), ForeignKey('program.program_code', onupdate="CASCADE"), nullable=True)
+                    Column('program_code', String(20), ForeignKey('program.program_code', onupdate="CASCADE"), nullable=True), # instructor belongs to 1 department originally
+                    UniqueConstraint('instructor_name', 'dob', 'address', 'phone_no', 'position', 'salutation', 'program_code', name='UniqueKey_instructor')
                     )
 
     instructor_course = Table('instructor_course', metadata_obj,
@@ -112,18 +114,21 @@ def create_schema(engine):
 
     section = Table('section', metadata_obj,
                     Column('section_id', Integer, primary_key=True, autoincrement=True),
+                    Column('section_name', String(10), nullable=False),
                     Column('building', String(10), nullable=False),
                     Column('room', Integer, nullable=False),
-                    Column('semester_id', Integer, ForeignKey('semester.semester_id', onupdate="CASCADE", ondelete="CASCADE"), nullable=False)
+                    Column('semester_id', Integer, ForeignKey('semester.semester_id', onupdate="CASCADE", ondelete="CASCADE"), nullable=False),
+                    UniqueConstraint('section_name', 'semester_id', name='UniqueKey_section') # only sem_id and name need to be unique
                     )
 
     student = Table('student', metadata_obj,
                     Column('student_id', Integer, primary_key=True, autoincrement=True),
-                    Column('name', String(50), nullable=False),
+                    Column('student_name', String(50), nullable=False),
                     Column('dob', Date, nullable=False),
                     Column('address', String(255), nullable=False),
                     Column('phone_no', String(10), nullable=False),
-                    Column('section_id', Integer, ForeignKey('section.section_id', onupdate="CASCADE"), nullable=True)
+                    Column('section_id', Integer, ForeignKey('section.section_id', onupdate="CASCADE"), nullable=True),
+                    UniqueConstraint('student_name', 'dob', 'address', 'phone_no', 'section_id', name='UniqueKey_student')
                     )
 
     metadata_obj.create_all(engine)
@@ -147,9 +152,9 @@ def insert_initial_records(engine):
     student = Table('student', metadata_obj, autoload=True, autoload_with=engine)
 
     program_list = [
-        {'program_code': 'BCE', 'name': 'Bachelors in Civil Engineering', 'level': 'Bachelors', 'num_years': 4},
-        {'program_code': 'BCT', 'name': 'Bachelors in Computer Engineering', 'level': 'Bachelors', 'num_years': 4},
-        {'program_code': 'M.Sc. Physics', 'name': 'Masters in Physics', 'level': 'Masters', 'num_years': 2}
+        {'program_code': 'BCE', 'program_name': 'Bachelors in Civil Engineering', 'level': 'Bachelors', 'num_years': 4},
+        {'program_code': 'BCT', 'program_name': 'Bachelors in Computer Engineering', 'level': 'Bachelors', 'num_years': 4},
+        {'program_code': 'M.Sc. Physics', 'program_name': 'Masters in Physics', 'level': 'Masters', 'num_years': 2}
     ]
 
     semester_list = [
@@ -159,9 +164,9 @@ def insert_initial_records(engine):
     ]
 
     course_list = [
-        {'course_code': '11.001', 'name': 'Introduction to Fluid Mechanics', 'credit_hours': 45, 'num_chapters': 10, 'practical_marks': 50, 'internal_marks': 20, 'exam_marks': 80},
-        {'course_code': '12.001', 'name': 'Digital Logic', 'credit_hours': 45, 'num_chapters': 10, 'practical_marks': 50, 'internal_marks': 20, 'exam_marks': 80},
-        {'course_code': '31.001', 'name': 'Introduction to Quantum Mechanics', 'credit_hours': 45, 'num_chapters': 10, 'practical_marks': 0, 'internal_marks': 20, 'exam_marks': 80}
+        {'course_code': '11.001', 'course_name': 'Introduction to Fluid Mechanics', 'credit_hours': 45, 'num_chapters': 10, 'practical_marks': 50, 'internal_marks': 20, 'exam_marks': 80},
+        {'course_code': '12.001', 'course_name': 'Digital Logic', 'credit_hours': 45, 'num_chapters': 10, 'practical_marks': 50, 'internal_marks': 20, 'exam_marks': 80},
+        {'course_code': '31.001', 'course_name': 'Introduction to Quantum Mechanics', 'credit_hours': 45, 'num_chapters': 10, 'practical_marks': 0, 'internal_marks': 20, 'exam_marks': 80}
     ]
 
     course_semester_list = [
@@ -171,9 +176,9 @@ def insert_initial_records(engine):
     ]
 
     instructor_list = [
-        {'instructor_id': 200001, 'name': 'John Doe', 'dob': '1975-03-11', 'address': 'San Francisco, California', 'phone_no': '9845011345', 'position': 'Professor', 'salutation': 'Prof. Dr.', 'program_code': 'BCE'},
-        {'instructor_id': 200002, 'name': 'Laura Philip', 'dob': '1968-07-23', 'address': 'San Jose, California', 'phone_no': '9845699024', 'position': 'Assistant Professor', 'salutation': 'Asst. Prof. Dr.', 'program_code': 'BCT'},
-        {'instructor_id': 200003, 'name': 'Jean Bell', 'dob': '1972-08-09', 'address': 'Miami, Florida', 'phone_no': '9877433560', 'position': 'Professor', 'salutation': 'Prof. Dr.', 'program_code': 'M.Sc. Physics'}
+        {'instructor_id': 200001, 'instructor_name': 'John Doe', 'dob': '1975-03-11', 'address': 'San Francisco, California', 'phone_no': '9845011345', 'position': 'Professor', 'salutation': 'Prof. Dr.', 'program_code': 'BCE'},
+        {'instructor_id': 200002, 'instructor_name': 'Laura Philip', 'dob': '1968-07-23', 'address': 'San Jose, California', 'phone_no': '9845699024', 'position': 'Assistant Professor', 'salutation': 'Asst. Prof. Dr.', 'program_code': 'BCT'},
+        {'instructor_id': 200003, 'instructor_name': 'Jean Bell', 'dob': '1972-08-09', 'address': 'Miami, Florida', 'phone_no': '9877433560', 'position': 'Professor', 'salutation': 'Prof. Dr.', 'program_code': 'M.Sc. Physics'}
     ]
 
     instructor_course_list = [
@@ -183,16 +188,16 @@ def insert_initial_records(engine):
     ]
 
     section_list = [
-        {'section_id': 300001, 'building': 'Alpha', 'room': 202, 'semester_id': 100001},
-        {'section_id': 300002, 'building': 'Bravo', 'room': 501, 'semester_id': 100002},
-        {'section_id': 300003, 'building': 'Zulu', 'room': 112, 'semester_id': 100003}
+        {'section_id': 300001, 'section_name': 'AB', 'building': 'Alpha', 'room': 202, 'semester_id': 100001},
+        {'section_id': 300002, 'section_name': 'CD', 'building': 'Bravo', 'room': 501, 'semester_id': 100002},
+        {'section_id': 300003, 'section_name': 'EF', 'building': 'Zulu', 'room': 112, 'semester_id': 100003}
     ]
 
     student_list = [
-        {'student_id': 400001, 'name': 'Pujan Dahal', 'dob': '1999-01-02', 'address': 'New Baneshowr, Kathmandu', 'phone_no': '9807233509', 'section_id': 300001},
-        {'student_id': 400002, 'name': 'Hattori Hanjo', 'dob': '2000-05-08', 'address': 'Satdobato, Kathmandu', 'phone_no': '9865011220', 'section_id': 300003},
-        {'student_id': 400003, 'name': 'Sinjo Watanabe', 'dob': '2002-06-09', 'address': 'Hokkaido, Japan', 'phone_no': '9813355679', 'section_id': 300002},
-        {'student_id': 400004, 'name': 'Kenichi Suga', 'dob': '1999-07-19', 'address': 'Tokyo, Japan', 'phone_no': '9800699123', 'section_id': 300001}
+        {'student_id': 400001, 'student_name': 'Pujan Dahal', 'dob': '1999-01-02', 'address': 'New Baneshowr, Kathmandu', 'phone_no': '9807233509', 'section_id': 300001},
+        {'student_id': 400002, 'student_name': 'Hattori Hanjo', 'dob': '2000-05-08', 'address': 'Satdobato, Kathmandu', 'phone_no': '9865011220', 'section_id': 300003},
+        {'student_id': 400003, 'student_name': 'Sinjo Watanabe', 'dob': '2002-06-09', 'address': 'Hokkaido, Japan', 'phone_no': '9813355679', 'section_id': 300002},
+        {'student_id': 400004, 'student_name': 'Kenichi Suga', 'dob': '1999-07-19', 'address': 'Tokyo, Japan', 'phone_no': '9800699123', 'section_id': 300001}
     ]
 
     table_dict = {
