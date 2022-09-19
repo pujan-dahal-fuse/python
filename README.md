@@ -52,7 +52,43 @@ which runs the Flask app in DEBUG mode.
 
 ## **4. orm**
 
-`orm` branch contains codes I used while learning Object Relationship Mapping (ORM). It consists of `orm/` folder. The `orm/` folder has `orm/datacamp_submissions.ipynb` which is the submissions I made to [datacamp python relational-database tutorial](https://campus.datacamp.com/courses/introduction-to-relational-databases-in-python). Another file `orm/orm_learn.ipynb` contains Python codes used while getting basic idea about ORM. `orm/requirements.txt` consists of extra libraries installed while coding in this branch. External libraries can be installed using the command:
+`orm` branch contains codes I used while learning Object Relationship Mapping (ORM) to interface with database in Python. I used `sqlalchemy` orm to operate on database. It consists of `orm/` folder. The `orm/` folder has `orm/datacamp_submissions.ipynb` which is the submissions I made to [datacamp (python relational-database tutorial)](https://campus.datacamp.com/courses/introduction-to-relational-databases-in-python). Another file `orm/orm_learn.ipynb` contains Python codes used while getting basic idea about ORM. `orm/requirements.txt` consists of extra libraries installed while coding in this branch. External libraries can be installed using the command:
 ```
 pip install -r requirements.txt
 ```
+
+Inside `orm/learning_management_system/` folder, there are codes to create and perform operations on learning management database using ORM. `learning_management_system_erd.png` consists of the Entity Relationship Diagram (ERD) of the database created. `database_creation.py` consists of codes to create and add records to database named LMS that is hosted on local machine. The address of the database is given in `db_address.py`. It should be changed when running this program on your machine.
+
+Further, `exceptions.py` consists of some custom exceptions used while writing API, `question.txt` consists the contexts for which REST APIs were written, and `api.py` consists of all the API codes written using `Flask` framework. The routes for APIs written in `api.py` are as follows:
+
+| Routes | Method | Operation Description |
+|--------|--------|-----------------------|
+| `/api/programs` | GET | Retrieve list of all programs |
+| `/api/students` | GET | Retrieve list of all students |
+| `/api/instructors` | GET | Retrieve list of all instructors|
+| `/api/program/students` | GET | Retrieve number of students in each program |
+| `/api/semester/students` | GET | Retrieve number of students in each semester |
+| `/api/section/students` | GET | Retrieve number of students in each section |
+| `/api/semester/course_list` | GET | Retrieve list of courses in each semester |
+| `/api/semester/section_list` | GET | Retrieve list of sections in each semester |
+| `/api/semester/instructor_list` | GET | Retrieve list of instructors in each semester |
+| `/api/insert/programs` | POST | Insert one or more programs into program table |
+| `/api/insert/semesters` | POST | Insert one or more semesters into semester table |
+| `/api/insert/courses` | POST | Insert one or more courses into course table |
+| `/api/insert/course_semesters` | POST | Insert one or more course semester record into course_semester table |
+| `/api/insert/sections` | POST | Insert one or more sections into sections table |
+| `/api/insert/students` | POST | Insert one or more students into students table |
+| `/api/insert/instructors` | POST | Insert one or more instructors into instructor table |
+| `/api/insert/instructor_courses` | POST | Insert one or more instructor course record into instructor_course table |
+
+To run the program, you first need to create a sql database of any name in your local machine. Then, you need to  update the database address of your local database into `DB_ADDRESS` in file `orm/learning_management_system/db_address.py`. Then, you need to create the entire database by running command:
+```
+python database_creation.py
+```
+
+After database is created, the APIs can be used to operate on the database accordingly. To run the app for REST APIs, you need to run the command:
+```
+python api.py
+```
+
+This command will run the APIs on `localhost:5000`. To this URL, the resource identifier routes can be appended to perform aforementioned operations on database.
