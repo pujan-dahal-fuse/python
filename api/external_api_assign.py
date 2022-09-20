@@ -127,7 +127,7 @@ def delete_movie(id):
 
 
 # update movie rating with given id to given rating
-@app.route('/api/update/<int:id>', methods=['PUT'])
+@app.route('/api/update/<int:id>', methods=['PATCH'])
 def update_movie(id):
     input_json = request.get_json()
     try:
