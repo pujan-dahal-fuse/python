@@ -27,13 +27,6 @@ def jprint(obj):
 @app.route('/api/programs', methods=['GET'])
 def programs():
     """Retrieve all records of programs"""
-        # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
 
     program = Table('program', metadata_obj, autoload=True, autoload_with=engine)
     stmt = select([program])
@@ -63,14 +56,6 @@ def programs():
 @app.route('/api/students', methods=['GET'])
 def students():
     """Retrieve all the records of students"""
-    
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
 
     student = Table('student', metadata_obj, autoload=True, autoload_with=engine)
     stmt = select([student])
@@ -101,14 +86,6 @@ def students():
 @app.route('/api/instructors', methods=['GET'])
 def instructors():
     """Retrieve all the records of instructors"""
-   
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
 
     instructor = Table('instructor', metadata_obj, autoload=True, autoload_with=engine)
     stmt = select([instructor])
@@ -141,14 +118,6 @@ def instructors():
 @app.route('/api/program/students', methods=['GET'])
 def program_students():
     """Retrieve number of students in each program"""
-    
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
 
     program = Table('program', metadata_obj, autoload=True, autoload_with=engine)
     semester = Table('semester', metadata_obj, autoload=True, autoload_with=engine)
@@ -193,14 +162,6 @@ def program_students():
 @app.route('/api/semester/students', methods=['GET'])
 def semester_students():
     """Retrieve number of students in each semester"""
-    
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
 
     semester = Table('semester', metadata_obj, autoload=True, autoload_with=engine)
     section = Table('section', metadata_obj, autolaod=True, autoload_with=engine)
@@ -240,14 +201,6 @@ def semester_students():
 @app.route('/api/section/students', methods=['GET'])
 def section_students():
     """Retrieve number of students in each section"""
-    
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
 
     section = Table('section', metadata_obj, autolaod=True, autoload_with=engine)
     student = Table('student', metadata_obj, autoload=True, autoload_with=engine)
@@ -288,14 +241,6 @@ def section_students():
 @app.route('/api/semester/course_list', methods=['GET'])
 def semester_courses_list():
     """Retrieve courses that are taught in each semester"""
-    
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
 
     semester = Table('semester', metadata_obj, autoload=True, autoload_with=engine)
     course = Table('course', metadata_obj, autolaod=True, autoload_with=engine)
@@ -363,14 +308,6 @@ def semester_courses_list():
 def semester_sections_list():
     """Retrieve list of sections of each semester"""
 
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
-
     semester = Table('semester', metadata_obj, autoload=True, autoload_with=engine)
     section = Table('section', metadata_obj, autoload=True, autoload_with=engine)
 
@@ -429,14 +366,6 @@ def semester_sections_list():
 @app.route('/api/semester/instructor_list', methods=['GET'])
 def semester_instructors_list():
     """Retrieve instructor list for each semester"""
-
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
 
     semester = Table('semester', metadata_obj, autoload=True, autoload_with=engine)
     course = Table('course', metadata_obj, audoload=True, autoload_with=engine)
@@ -525,14 +454,6 @@ def insert_programs():
     # get the body of insertion request that contains the new records to be inserted
     body = request.get_json()
 
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
-
     program = Table('program', metadata_obj, autoload=True, autoload_with=engine)
     stmt = insert(program)
     try:
@@ -613,15 +534,6 @@ def insert_courses():
     # get the body of insertion request that contains the new records to be inserted
     # in input data there are all fields of course table, (program_code and semester_num) are optional
     body = request.get_json()
-
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
-
 
     semester = Table('semester', metadata_obj, autoload=True, autoload_with=engine)
     course = Table('course', metadata_obj, autoload=True, autolaod_with=engine)
@@ -707,14 +619,6 @@ def insert_course_semesters():
     # in input data there are course_code, program_code and semester_num
     body = request.get_json()
 
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
-
     course_semester = Table('course_semester', metadata_obj, autoload=True, autoload_with=engine)
     course = Table('course', metadata_obj, autoload=True, autoload_with=engine)
     semester = Table('semester', metadata_obj, autoload=True, autoload_with=engine)
@@ -772,14 +676,6 @@ def insert_sections():
     # get the body of insertion request that contains the new records to be inserted
     # in input data there are all fields of section table (except section_id), a program_code and sem_number
     body = request.get_json()
-
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
 
     section = Table('section', metadata_obj, autoload=True, autoloadwith=engine)
     semester = Table('semester', metadata_obj, autoload=True, autoloadwith=engine)
@@ -847,14 +743,6 @@ def insert_students():
     # in input data there are all fields of student table (except section_id)
     # program_code, sem_number and section_name are optional
     body = request.get_json()
-
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
 
     section = Table('section', metadata_obj, autoload=True, autoloadwith=engine)
     semester = Table('semester', metadata_obj, autoload=True, autoloadwith=engine)
@@ -939,14 +827,6 @@ def insert_instructors():
     # in input data there are all fields of instructor table and a program_code
     # course_code field is optional (if it is provided, record is inserted to instructor_course database)
     body = request.get_json()
-
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
 
     instructor = Table('instructor', metadata_obj, autoload=True, autoload_with=engine)
     instructor_course = Table('instructor_course', metadata_obj, autoload=True, autoload_with=engine)
@@ -1034,14 +914,6 @@ def insert_instructor_courses():
     # in input data there are instructor_id and course_code
     body = request.get_json()
 
-    # create engine to connect to database
-    engine = create_engine(DB_ADDRESS)
-    # create connection to perform queries on database
-    conn = engine.connect()
-    # create MetaData object
-    metadata_obj = MetaData(bind=engine)
-    MetaData.reflect(metadata_obj)
-
     course = Table('course', metadata_obj, autoload=True, autoload_with=engine)
     instructor = Table('instructor', metadata_obj, autoload=True, autoload_with=engine)
     instructor_course = Table('instructor_course', metadata_obj, autoload=True, autoload_with=engine)
@@ -1090,4 +962,16 @@ def insert_instructor_courses():
 
 
 if __name__ == '__main__':
+    # here engine is connected to database in main program (here) because connecting to databse is a costly task
+    # if we connect to database in each api, it will be costly
+
+    # create engine to connect to database
+    engine = create_engine(DB_ADDRESS)
+    # create connection to perform queries on database
+    conn = engine.connect()
+    # create MetaData object
+    metadata_obj = MetaData(bind=engine)
+    MetaData.reflect(metadata_obj)
+
+    # run app in debug mode
     app.run(debug=True)
