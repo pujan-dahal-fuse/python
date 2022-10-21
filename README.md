@@ -1,10 +1,11 @@
 # **Python Repository**
 
-This repository is made up of codes I used while learning Python and APIs. It is divided into 4 branches:
+This repository is made up of codes I used while learning Python and APIs, during my trainee period at Fusemachines Nepal. It is divided into 5 branches:
 1. **main**
 2. **codewars**
 3. **api**
 4. **orm**
+5. **pandas**
 ## **1. main**
 `main` contains codes that I used while learning basic and advanced Python. Codes are within `python_basic_advanced/` folder. Basic codes are in `python_basic_advanced/task1.py` and `python_basic_advanced/constant.py` files. Advanced codes are in `python_basic_advanced/advanced_topics.ipynb` file.
 
@@ -41,11 +42,11 @@ This repository is made up of codes I used while learning Python and APIs. It is
 
 Each `.py` file within `api_practice/` folder can be run separately, but first all the requirements need to be installed. Requirements can be installed using command:
 ```
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 Each API file can be executed using command:
 ```
-python <path_to_file>/filename.py
+$ python <path_to_file>/filename.py
 ```
 which runs the Flask app in DEBUG mode.
 
@@ -54,7 +55,7 @@ which runs the Flask app in DEBUG mode.
 
 `orm` branch contains codes I used while learning Object Relationship Mapping (ORM) to interface with database in Python. I used `sqlalchemy` orm to operate on database. It consists of `orm/` folder. The `orm/` folder has `orm/datacamp_submissions.ipynb` which is the submissions I made to [datacamp (python relational-database tutorial)](https://campus.datacamp.com/courses/introduction-to-relational-databases-in-python). Another file `orm/orm_learn.ipynb` contains Python codes used while getting basic idea about ORM. `orm/requirements.txt` consists of extra libraries installed while coding in this branch. External libraries can be installed using the command:
 ```
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 Inside `orm/learning_management_system/` folder, there are codes to create and perform operations on learning management database using ORM. `learning_management_system_erd.png` consists of the Entity Relationship Diagram (ERD) of the database created. `database_creation.py` consists of codes to create and add records to database named LMS that is hosted on local machine. The address of the database is given in `db_address.py`. It should be changed when running this program on your machine.
@@ -83,12 +84,23 @@ Further, `exceptions.py` consists of some custom exceptions used while writing A
 
 To run the program, you first need to create a sql database of any name in your local machine. Then, you need to  update the database address of your local database into `DB_ADDRESS` in file `orm/learning_management_system/db_address.py`. Then, you need to create the entire database by running command:
 ```
-python database_creation.py
+$ python database_creation.py
 ```
 
 After database is created, the APIs can be used to operate on the database accordingly. To run the app for REST APIs, you need to run the command:
 ```
-python api.py
+$ python api.py
 ```
 
-This command will run the APIs on `localhost:5000`. To this URL, the resource identifier routes can be appended to perform aforementioned operations on database.
+This command will run the APIs at [`localhost:5000`](https://localhost:5000). To this URL, the resource identifier routes can be appended to perform aforementioned operations on database.
+
+
+## **5. pandas**
+This branch consists of codes that involve loading and transforming data using the python pandas library. It consists of a few assignments, and the data needed for those assignments are also provided within the pandas folder.
+
+Before running this branch, few Python packages need to be installed using the command:
+```
+$ pip install -r requirements.txt
+```
+
+All the codes are then available in `.ipynb` files which can be run using `jupyter-notebook`.
